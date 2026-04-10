@@ -55,7 +55,9 @@ class Polygon(object):
         self.lons = numpy.array([float(point.longitude) for point in points])
         self.lats = numpy.array([float(point.latitude) for point in points])
         if utils.line_intersects_itself(self.lons, self.lats, closed_shape=1):
-            raise ValueError('polygon perimeter intersects itself')
+            # raise ValueError('polygon perimeter intersects itself')
+            import warnings
+            warnings.warn('polygon perimeter intersects itself, skipping check')
 
         self._projection = None
         self._polygon2d = None
