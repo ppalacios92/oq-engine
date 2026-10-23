@@ -34,7 +34,9 @@ from openquake.hazardlib.gsim.nga_east import (get_phi_s2ss_at_quantile,
                                                PHI_SETUP,
                                                PHI_S2SS_MODEL,
                                                TAU_EXECUTION)
-warnings.filterwarnings("ignore", category=np.RankWarning)
+# numpy 2 moved RankWarning to np.exceptions; keep numpy 1 working too
+warnings.filterwarnings(
+    "ignore", category=getattr(np, "RankWarning", None) or np.exceptions.RankWarning)
 PATH = os.path.join(os.path.dirname(__file__), "..", "nga_east_tables")
 
 
